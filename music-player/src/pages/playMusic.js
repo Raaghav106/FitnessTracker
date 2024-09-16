@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import { Howl } from 'howler';
-
-const DEEZER_API_BASE = 'https://api.deezer.com';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlay, faPause } from '@fortawesome/free-solid-svg-icons';
+import '../App.css';
 
 const MusicPlayerComponent = () => {
   const [songs, setSongs] = useState([]);
@@ -17,21 +18,17 @@ const MusicPlayerComponent = () => {
 
   useEffect(() => {
     const fetchSongs = async () => {
-      let apiUrl = '';
-
-      if (filterType === 'artist') {
-        apiUrl = `${DEEZER_API_BASE}/search/artist?q=${filterValue}`;
-      } else if (filterType === 'genre') {
-        apiUrl = `${DEEZER_API_BASE}/genre/${filterValue}/artists`;
-      } else if (filterType === 'mood') {
-        apiUrl = `${DEEZER_API_BASE}/search?q=mood:"${filterValue}"`;
-      }
-
+      const apiUrl = `http://localhost:5000/api/songs?type=${filterType}&value=${filterValue}`;
+    
       try {
         const response = await axios.get(apiUrl);
-        setSongs(response.data.data);
+        if (response.data && response.data.data) {
+          setSongs(response.data.data);
+        } else {
+          console.error('Unexpected API response:', response.data);
+        }
       } catch (error) {
-        console.error('Error fetching songs:', error);
+        console.error('Error fetching songs:', error.message);
       }
     };
 
@@ -59,7 +56,7 @@ const MusicPlayerComponent = () => {
   };
 
   return (
-    <div>
+    <div className="music-player-container">
       <h1>Music Player - {filterType} : {filterValue}</h1>
       <div>
         {songs.length > 0 ? (
@@ -68,9 +65,13 @@ const MusicPlayerComponent = () => {
               <li key={song.id}>
                 {song.title} by {song.artist ? song.artist.name : 'Unknown'}
                 {playingSong === song.id ? (
-                  <button onClick={pauseSong}>Pause</button>
+                  <button className="control-button" onClick={pauseSong}>
+                    <FontAwesomeIcon icon={faPause} />
+                  </button>
                 ) : (
-                  <button onClick={() => playSong(song)}>Play</button>
+                  <button className="control-button" onClick={() => playSong(song)}>
+                    <FontAwesomeIcon icon={faPlay} />
+                  </button>
                 )}
               </li>
             ))}

@@ -1,3 +1,23 @@
+/* Global Styles */
+:root {
+  --primary-color: black;
+  --secondary-color: yellow;
+  --text-color: white;
+  --input-bg-color: #333; /* Dark background for input fields */
+  --button-bg-color: yellow;
+  --button-text-color: black;
+  --button-hover-bg-color: #f5f5f5; /* Slightly lighter color for hover effect */
+}
+
+body {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* App Component Styles */
 .App {
   text-align: center;
 }
@@ -14,20 +34,21 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: var(--primary-color);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: var(--text-color);
 }
 
 .App-link {
-  color: #61dafb;
+  color: var(--secondary-color);
 }
 
+/* Keyframes */
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -35,4 +56,85 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* Filter Component Styles */
+.filter-container {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  padding: 20px;
+  margin: 10px;
+  border-radius: 5px;
+  border: 1px solid var(--secondary-color);
+}
+
+.filter-container label {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--text-color);
+}
+
+.filter-container select,
+.filter-container input[type="text"] {
+  background-color: var(--input-bg-color);
+  color: var(--text-color);
+  border: 1px solid var(--secondary-color);
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.filter-container button {
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.filter-container button:hover {
+  background-color: var(--button-hover-bg-color);
+}
+
+.filter-container button:focus {
+  outline: none;
+}
+
+/* Music Player Component Styles */
+.music-player-container {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  padding: 20px;
+  margin: 10px;
+  border-radius: 5px;
+  border: 1px solid var(--secondary-color);
+}
+
+.music-player-container ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.music-player-container li {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--secondary-color);
+}
+
+.music-player-container button {
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.music-player-container button:hover {
+  background-color: var(--button-hover-bg-color);
+}
+
+.music-player-container button:focus {
+  outline: none;
 }
